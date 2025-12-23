@@ -1,6 +1,6 @@
 # civil-date
 
-A lightweight utility for handling **timezone-independent calendar dates**.
+A lightweight utility (1,398 bytes minified, 655 bytes gzipped) for handling **timezone-independent calendar dates**.
 
 A "civil date" refers to a standard calendar day (Year-Month-Day) used for administrative and everyday purposes. Unlike a timestamp, it represents a whole day regardless of the time or the user's location.
 
@@ -43,7 +43,7 @@ There are low-level tree-shakeable methods you can import and use, or a class if
 You can use the individual functions directly if you don't want to use the class.
 
 ```ts
-import { encode, decode, fromDate, toDate } from 'civil-date'
+import { encode, decode, fromDate, toDate, toISOString } from 'civil-date'
 
 // Convert a Date object to a unix day number (uses local time)
 const days = fromDate(new Date()) // 20447
@@ -57,6 +57,12 @@ const decodedDays = decode('FRT') // 20447
 // Convert a unix day number or Radix 36 string to a Date object (midnight UTC)
 const date = toDate(days)
 const date2 = toDate('FRT')
+
+// Convert a Date object to an ISO 8601 string (YYYY-MM-DD)
+const iso = toISOString(new Date('2025-12-19T23:00:00-06:00')) // '2025-12-19'
+
+// Note: Unlike date.toISOString(), this preserves the local date and avoids
+// UTC shifts (which would result in '2025-12-20' in this example).
 ```
 
 ### CivilDate Class

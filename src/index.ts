@@ -96,6 +96,23 @@ export function toDate(value: number | string): Date {
 }
 
 /**
+ * Returns the date as an ISO 8601 string (YYYY-MM-DD).
+ * Uses the local time of the provided Date object, avoiding UTC shifts
+ * that could happen if using the .toISOString() method of the Date object.
+ *
+ * @param date - The Date object to format.
+ * @returns The ISO date string.
+ */
+export function toISOString(date: Date) {
+	const y = date.getFullYear()
+	// Pad month and day with a leading zero if they are < 10
+	const m = String(date.getMonth() + 1).padStart(2, '0')
+	const d = String(date.getDate()).padStart(2, '0')
+
+	return `${y}-${m}-${d}`
+}
+
+/**
  * A utility class for handling dates as compact Radix 36 strings or day numbers.
  */
 export class CivilDate {
@@ -162,11 +179,9 @@ export class CivilDate {
 	 */
 	toISOString() {
 		const date = toDate(this.value)
-		const y = date.getUTCFullYear()
-		// Pad month and day with a leading zero if they are < 10
-		const m = String(date.getUTCMonth() + 1).padStart(2, '0')
-		const d = String(date.getUTCDate()).padStart(2, '0')
-
-  	return `${y}-${m}-${d}`
+		// at this point, the date is a UTC date, so we make a local one with the UTC parts
+		const local = new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
+		// toISOString uses the local parts, to avoid timezone jumps
+		return toISOString(local)
 	}
 }

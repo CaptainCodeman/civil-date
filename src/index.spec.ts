@@ -1,4 +1,4 @@
-import { encode, decode, fromDate, toDate, CivilDate } from './index'
+import { encode, decode, fromDate, toDate, toISOString, CivilDate } from './index'
 
 describe('Civil Date Utilities', () => {
 	describe('encode()', () => {
@@ -86,6 +86,18 @@ describe('Civil Date Utilities', () => {
 		})
 	})
 
+	describe('toISOString()', () => {
+		it('should format a local date correctly', () => {
+			const date = new Date('2025-12-23T22:14:37-06:00')
+			expect(toISOString(date)).toBe('2025-12-23')
+		})
+
+		it('should pad single digit months and days', () => {
+			const date = new Date(2025, 0, 5)
+			expect(toISOString(date)).toBe('2025-01-05')
+		})
+	})
+
 	describe('CivilDate Class', () => {
 		afterEach(() => {
 			vi.useRealTimers()
@@ -102,7 +114,7 @@ describe('Civil Date Utilities', () => {
 		})
 
 		it('should initialize from a Date object', () => {
-			const date = new Date(2025, 11, 23) // Dec 23
+			const date = new Date('2025-12-23T22:14:37-06:00')
 			const cd = new CivilDate(date)
 			expect(cd.toISOString()).toBe('2025-12-23')
 		})

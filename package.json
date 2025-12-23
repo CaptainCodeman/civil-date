@@ -1,6 +1,6 @@
 {
 	"name": "civil-date",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Naive date utility for efficient storage of date related data",
 	"keywords": [
 		"date",
