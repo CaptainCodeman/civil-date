@@ -1,0 +1,55 @@
+{
+	"name": "civil-date",
+	"version": "1.0.0",
+	"description": "Naive date utility for efficient storage of date related data",
+	"keywords": [
+		"date",
+		"time",
+		"timezone",
+		"datetime",
+		"civil-date",
+		"naive-date",
+		"temporal",
+		"plaindate",
+		"utility",
+		"encoding",
+		"compact",
+		"storage",
+		"database",
+		"key"
+	],
+	"type": "module",
+	"files": [
+		"dist"
+	],
+	"module": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsup",
+		"prepack": "tsup && publint",
+		"test": "vitest run",
+		"test:watch": "vitest"
+	},
+	"homepage": "https://captaincodeman.github.io/civil-date/",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/captaincodeman/civil-date.git"
+	},
+	"author": "Simon Green <simon@captaincodeman.com> (https://github.com/captaincodeman)",
+	"license": "ISC",
+	"packageManager": "pnpm@10.26.2",
+	"devDependencies": {
+		"publint": "^0.3.16",
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3",
+		"vite": "^7.3.0",
+		"vite-plugin-dts": "^4.5.4",
+		"vitest": "^4.0.16"
+	}
+}
